@@ -7,9 +7,8 @@ cmake_minimum_required(VERSION 3.19)
 project(Pong)
 set(PROJECT_VERSION_MAJOR 0)
 set(PROJECT_VERSION_MINOR 1)
-set(PROJECT_ASSET_DIR "${PROJECT_SOURCE_DIR}/assets")
+set(PROJECT_ASSET_DIR "\"${PROJECT_SOURCE_DIR}/assets\"")
 
-# these reflect my linux env variables with the same names
 set(SFML_INCLUDE_DIR "/usr/include/SFML")
 set(MATHFU_ROOT "/home/ryan/Software/mathfu")
 
@@ -21,7 +20,8 @@ set(SFML_LIBS
 set(CPP_FILES 
     "${PROJECT_SOURCE_DIR}/src/main.cpp" 
     "${PROJECT_SOURCE_DIR}/src/paddle.cpp" 
-    "${PROJECT_SOURCE_DIR}/src/ball.cpp")
+    "${PROJECT_SOURCE_DIR}/src/ball.cpp"
+    "${PROJECT_SOURCE_DIR}/src/score.cpp")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
@@ -36,8 +36,8 @@ endif()
 
 # create a configuration header file from some input, allowing us to access
 # certain cmake variables from within our source code.
-configure_file("${PROJECT_SOURCE_DIR}/include/config.h.in" 
-    "${PROJECT_BINARY_DIR}/include/config.h")
+configure_file("${PROJECT_SOURCE_DIR}/include/config.hpp.in" 
+    "${PROJECT_BINARY_DIR}/include/config.hpp")
 
 set(SFML_HEADERS 
     "${SFML_INCLUDE_DIR}/System" 
@@ -51,7 +51,8 @@ target_include_directories(Pong PRIVATE
     "${SFML_HEADERS}" 
     "${PROJECT_SOURCE_DIR}/include" 
     "${MATHFU_ROOT}/include" 
-    "${MATHFU_ROOT}/dependencies/vectorial/include")
+    "${MATHFU_ROOT}/dependencies/vectorial/include"
+    "${PROJECT_BINARY_DIR}/include")
 
 # link our executable to the libraries that we need
 target_link_libraries(Pong "${SFML_LIBS}")

@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "paddle.hpp"
+#include "score.hpp"
 #include "constants.hpp"
+#include "config.hpp"
 #include <iostream>
 #include <vector>
 
@@ -8,18 +10,24 @@ int main()
 {
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_INIT_WIDTH, WINDOW_INIT_HEIGHT), "Pong");
-    sf::Clock clock;
-    Paddle left(SCORE_ZONE_WIDTH,
-                WINDOW_INIT_HEIGHT / 2 - PADDLE_HEIGHT / 2,
-                sf::Keyboard::Key::W,
-                sf::Keyboard::Key::S);
-    Paddle right(WINDOW_INIT_WIDTH - SCORE_ZONE_WIDTH - PADDLE_WIDTH,
-                 WINDOW_INIT_HEIGHT / 2 - PADDLE_HEIGHT / 2,
-                 sf::Keyboard::Key::Up,
-                 sf::Keyboard::Key::Down);
-
-    // The easy way of implementing a FPS limit
     window.setFramerateLimit(FRAMES_PER_SEC);
+    sf::Clock clock;
+
+    Paddle leftPaddle(PADDLE_OFFSET_X,
+                      WINDOW_INIT_HEIGHT / 2 - PADDLE_HEIGHT / 2,
+                      sf::Keyboard::Key::W,
+                      sf::Keyboard::Key::S);
+    Paddle rightPaddle(WINDOW_INIT_WIDTH - PADDLE_OFFSET_X - PADDLE_WIDTH,
+                       WINDOW_INIT_HEIGHT / 2 - PADDLE_HEIGHT / 2,
+                       sf::Keyboard::Key::Up,
+                       sf::Keyboard::Key::Down);
+    Score leftScore(WINDOW_INIT_WIDTH / 4, 0, -SCORE_ZONE_WIDTH);
+    Score rightScore(WINDOW_INIT_WIDTH * 3 / 4 - FONT_SIZE_PIXELS, 0, WINDOW_INIT_WIDTH);
+
+    sf::RectangleShape centreLine;
+    centreLine.setFillColor(sf::Color::White);
+    centreLine.setPosition(WINDOW_INIT_WIDTH / 2, 0);
+    centreLine.setSize(sf::Vector2f(1, WINDOW_INIT_HEIGHT));
 
     while (window.isOpen())
     {
@@ -28,8 +36,8 @@ int main()
 
         if (sf::Keyboard::isKeyPressed)
         {
-            left.listenForInput();
-            right.listenForInput();
+            leftPaddle.listenForInput();
+            rightPaddle.listenForInput();
         }
 
         sf::Event event;
@@ -42,8 +50,16 @@ int main()
         }
 
         window.clear();
-        window.draw(left.getShape());
-        window.draw(right.getShape());
+        window.draw(leftPaddle.getShape());
+        window.draw(rightPaddle.getShape());
+
+        window.draw(leftScore.getText());
+        window.draw(rightScore.getText());
+
+        window.draw(leftScore.getScoreZone());
+        window.draw(rightScore.getScoreZone());
+
+        window.draw(centreLine);
         window.display();
 
         // sf::Time end = clock.getElapsedTime();
