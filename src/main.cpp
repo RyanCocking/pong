@@ -5,11 +5,15 @@ int main()
 {
 
     sf::RenderWindow window(sf::VideoMode(300, 300), "SFML works!");
-    Paddle p(50, 200, sf::Vector2f(0, 20), 10, sf::Keyboard::Key::W,
-             sf::Keyboard::Key::S);
+    Paddle p(sf::Keyboard::Key::W, sf::Keyboard::Key::S);
 
     while (window.isOpen())
     {
+
+        if (sf::Keyboard::isKeyPressed)
+        {
+        }
+
         sf::Event event;
         while (window.pollEvent(event))
         {

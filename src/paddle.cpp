@@ -1,23 +1,16 @@
 #include "paddle.hpp"
 
-Paddle::Paddle()
-    : moveSpeed(2), controlUp(sf::Keyboard::Key::W),
-      controlDown(sf::Keyboard::Key::S)
-{
-    shape.setSize(sf::Vector2f(20, 20));
-    shape.setFillColor(sf::Color::Red);
-}
-
 Paddle::Paddle(
-    float width = 50,
-    float height = 50,
-    sf::Vector2f initPos = sf::Vector2f(0.0f, 0.0f),
-    float speed = 5,
     sf::Keyboard::Key up = sf::Keyboard::Key::W,
     sf::Keyboard::Key down = sf::Keyboard::Key::S)
-    : moveSpeed(speed), controlUp(up), controlDown(down)
+    : moveSpeed(5),
+      shapeWidth(20),
+      shapeHeight(100),
+      initPos(sf::Vector2f(0.0f, 0.0f)),
+      controlUp(up),
+      controlDown(down)
 {
-    shape.setSize(sf::Vector2f(width, height));
+    shape.setSize(sf::Vector2f(shapeWidth, shapeHeight));
     shape.setPosition(initPos);
     shape.setFillColor(sf::Color::White);
 }
@@ -36,10 +29,10 @@ void Paddle::listenForInput()
 {
     if (sf::Keyboard::isKeyPressed(controlUp))
     {
-        updatePos(0, moveSpeed);
+        updatePos(0, -moveSpeed);
     }
     else if (sf::Keyboard::isKeyPressed(controlDown))
     {
-        updatePos(0, -moveSpeed);
+        updatePos(0, moveSpeed);
     }
 }

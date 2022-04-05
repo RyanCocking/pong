@@ -8,13 +8,15 @@ class Paddle
 private:
     sf::RectangleShape shape;
     float moveSpeed;
+    float shapeWidth;
+    float shapeHeight;
+    sf::Vector2f initPos;
     sf::Keyboard::Key controlUp;
     sf::Keyboard::Key controlDown;
 
 public:
     Paddle();
-    Paddle(float width, float height, sf::Vector2f initPos, float speed,
-           sf::Keyboard::Key up, sf::Keyboard::Key down);
+    Paddle(sf::Keyboard::Key up, sf::Keyboard::Key down);
     void updatePos(float dx, float dy);
     sf::RectangleShape getShape();
     void listenForInput();
