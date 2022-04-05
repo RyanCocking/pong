@@ -1,16 +1,22 @@
 #include <SFML/Graphics.hpp>
 #include "paddle.hpp"
+#include "constants.hpp"
 #include <iostream>
-
-int const FRAMES_PER_SEC = 30;
-sf::Int64 const MICROSEC_PER_FRAME = (1.0 / FRAMES_PER_SEC) * 1e6;
+#include <vector>
 
 int main()
 {
 
-    sf::RenderWindow window(sf::VideoMode(300, 300), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(WINDOW_INIT_WIDTH, WINDOW_INIT_HEIGHT), "Pong");
     sf::Clock clock;
-    Paddle p(sf::Keyboard::Key::W, sf::Keyboard::Key::S);
+    Paddle left(SCORE_ZONE_WIDTH,
+                WINDOW_INIT_HEIGHT / 2 - PADDLE_HEIGHT / 2,
+                sf::Keyboard::Key::W,
+                sf::Keyboard::Key::S);
+    Paddle right(WINDOW_INIT_WIDTH - SCORE_ZONE_WIDTH - PADDLE_WIDTH,
+                 WINDOW_INIT_HEIGHT / 2 - PADDLE_HEIGHT / 2,
+                 sf::Keyboard::Key::Up,
+                 sf::Keyboard::Key::Down);
 
     // The easy way of implementing a FPS limit
     window.setFramerateLimit(FRAMES_PER_SEC);
@@ -22,7 +28,8 @@ int main()
 
         if (sf::Keyboard::isKeyPressed)
         {
-            p.listenForInput();
+            left.listenForInput();
+            right.listenForInput();
         }
 
         sf::Event event;
@@ -35,7 +42,8 @@ int main()
         }
 
         window.clear();
-        window.draw(p.getShape());
+        window.draw(left.getShape());
+        window.draw(right.getShape());
         window.display();
 
         // sf::Time end = clock.getElapsedTime();
