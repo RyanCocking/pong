@@ -56,9 +56,6 @@ int main()
         window.draw(leftScore.getText());
         window.draw(rightScore.getText());
 
-        window.draw(leftScore.getScoreZone());
-        window.draw(rightScore.getScoreZone());
-
         window.draw(centreLine);
         window.display();
 
