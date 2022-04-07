@@ -3,6 +3,7 @@
 #include "score.hpp"
 #include "constants.hpp"
 #include "config.hpp"
+#include "ball.hpp"
 #include <iostream>
 #include <vector>
 
@@ -13,6 +14,7 @@ int main()
     window.setFramerateLimit(FRAMES_PER_SEC);
     sf::Clock clock;
 
+    Ball ball(false);
     Paddle leftPaddle(PADDLE_OFFSET_X,
                       WINDOW_INIT_HEIGHT / 2 - PADDLE_HEIGHT / 2,
                       sf::Keyboard::Key::W,
@@ -21,8 +23,9 @@ int main()
                        WINDOW_INIT_HEIGHT / 2 - PADDLE_HEIGHT / 2,
                        sf::Keyboard::Key::Up,
                        sf::Keyboard::Key::Down);
-    Score leftScore(WINDOW_INIT_WIDTH / 4, 0, -SCORE_ZONE_WIDTH);
-    Score rightScore(WINDOW_INIT_WIDTH * 3 / 4 - FONT_SIZE_PIXELS, 0, WINDOW_INIT_WIDTH);
+    std::vector<Paddle> paddles = {leftPaddle, rightPaddle};
+    Score leftScore(WINDOW_INIT_WIDTH / 4, 0, WINDOW_INIT_WIDTH);
+    Score rightScore(WINDOW_INIT_WIDTH * 3 / 4 - FONT_SIZE_PIXELS, 0, -SCORE_ZONE_WIDTH);
 
     sf::RectangleShape centreLine;
     centreLine.setFillColor(sf::Color::White);
@@ -38,6 +41,29 @@ int main()
         {
             leftPaddle.listenForInput();
             rightPaddle.listenForInput();
+            ball.listenForInput();
+        }
+
+        ball.paddleCollision(leftPaddle.getShape().getGlobalBounds());
+        ball.paddleCollision(rightPaddle.getShape().getGlobalBounds());
+        ball.updatePos();
+
+        bool leftHasScored = leftScore.attemptScore(ball.getShape().getGlobalBounds());
+        bool rightHasScored = rightScore.attemptScore(ball.getShape().getGlobalBounds());
+
+        if ((leftHasScored == true) and (rightHasScored == true))
+        {
+            throw std::logic_error("Cannot have simultaneous point scoring");
+        }
+
+        ball.resetIfScored(leftHasScored);
+        ball.resetIfScored(rightHasScored);
+
+        if ((leftScore.getValue() == SCORE_TO_WIN) or (rightScore.getValue() == SCORE_TO_WIN))
+        {
+            ball.resetPos();
+            leftScore.reset();
+            rightScore.reset();
         }
 
         sf::Event event;
@@ -50,6 +76,8 @@ int main()
         }
 
         window.clear();
+        window.draw(ball.getShape());
+
         window.draw(leftPaddle.getShape());
         window.draw(rightPaddle.getShape());
 

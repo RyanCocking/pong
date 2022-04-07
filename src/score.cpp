@@ -38,14 +38,16 @@ sf::Text Score::getText()
     return text;
 }
 
-bool Score::withinScoreZone(sf::Vector2f vec)
+int Score::getValue()
 {
-    float x0 = scoreZone.getGlobalBounds().left;
-    float x1 = x0 + scoreZone.getGlobalBounds().width;
-    float y0 = scoreZone.getGlobalBounds().top;
-    float y1 = y0 + scoreZone.getGlobalBounds().height;
-    if ((vec.x > x0 and vec.x < x1) and (vec.y > y0 and vec.y < y1))
+    return scoreVal;
+}
+
+bool Score::attemptScore(sf::FloatRect rectBounds)
+{
+    if (scoreZone.getGlobalBounds().intersects(rectBounds))
     {
+        increase();
         return true;
     }
     return false;

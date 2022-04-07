@@ -1,14 +1,14 @@
 #include "paddle.hpp"
 
 Paddle::Paddle(
-    float x0,
-    float y0,
+    float xi,
+    float yi,
     sf::Keyboard::Key up = sf::Keyboard::Key::W,
     sf::Keyboard::Key down = sf::Keyboard::Key::S)
     : moveSpeed(PADDLE_SPEED),
       shapeWidth(PADDLE_WIDTH),
       shapeHeight(PADDLE_HEIGHT),
-      initPos(sf::Vector2f(x0, y0)),
+      initPos(sf::Vector2f(xi, yi)),
       controlUp(up),
       controlDown(down),
       yPosMin(0),

@@ -20,7 +20,7 @@ private:
     bool withinMaxBound;
 
 public:
-    Paddle(float x0, float y0, sf::Keyboard::Key up, sf::Keyboard::Key down);
+    Paddle(float xi, float yi, sf::Keyboard::Key up, sf::Keyboard::Key down);
     void updatePos(float dx, float dy);
     sf::RectangleShape getShape();
     void listenForInput();

@@ -22,7 +22,8 @@ public:
     void increase();
     void reset();
     sf::Text getText();
-    bool withinScoreZone(sf::Vector2f xy);
+    int getValue();
+    bool attemptScore(sf::FloatRect rectBounds);
     sf::RectangleShape getScoreZone();
 };
 
