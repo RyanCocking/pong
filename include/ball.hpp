@@ -2,6 +2,7 @@
 #define BALL_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "constants.hpp"
 #include "paddle.hpp"
 #include <vector>
@@ -18,7 +19,7 @@ private:
 public:
     Ball(bool sides);
     void wallCollision();
-    void paddleCollision(sf::FloatRect paddleRect);
+    void paddleCollision(sf::FloatRect paddleRect, Paddle *paddle);
     void updatePos();
     sf::RectangleShape getShape();
     void resetPos();

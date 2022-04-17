@@ -4,7 +4,8 @@ Paddle::Paddle(
     float xi,
     float yi,
     sf::Keyboard::Key up = sf::Keyboard::Key::W,
-    sf::Keyboard::Key down = sf::Keyboard::Key::S)
+    sf::Keyboard::Key down = sf::Keyboard::Key::S,
+    std::string soundFile = "")
     : moveSpeed(PADDLE_SPEED),
       shapeWidth(PADDLE_WIDTH),
       shapeHeight(PADDLE_HEIGHT),
@@ -17,6 +18,8 @@ Paddle::Paddle(
     shape.setSize(sf::Vector2f(shapeWidth, shapeHeight));
     shape.setPosition(initPos);
     shape.setFillColor(sf::Color::White);
+
+    buffer.loadFromFile(soundFile);
 }
 
 void Paddle::updatePos(float dx, float dy)
@@ -59,4 +62,10 @@ void Paddle::checkBounds()
     {
         std::logic_error("Both y bounds exceeded simultaneously");
     }
+}
+
+void Paddle::playSound()
+{
+    soundOnHit.setBuffer(buffer);
+    soundOnHit.play();
 }

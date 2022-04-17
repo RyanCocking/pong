@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "paddle.hpp"
 #include "score.hpp"
 #include "constants.hpp"
@@ -14,15 +15,24 @@ int main()
     window.setFramerateLimit(FRAMES_PER_SEC);
     sf::Clock clock;
 
+    sf::SoundBuffer buf;
+    sf::Sound sound;
+
+    buf.loadFromFile(std::string(PROJECT_ASSET_DIR) + "/sounds/4391__noisecollector__pongblipf-5.wav");
+    sound = sf::Sound(buf);
+    sound.play();
+
+    std::cout << "Hello" << std::endl;
+
     Ball ball(false);
     Paddle leftPaddle(PADDLE_OFFSET_X,
                       WINDOW_INIT_HEIGHT / 2 - PADDLE_HEIGHT / 2,
-                      sf::Keyboard::Key::W,
-                      sf::Keyboard::Key::S);
+                      sf::Keyboard::Key::W, sf::Keyboard::Key::S,
+                      std::string(PROJECT_ASSET_DIR) + "/sounds/4390__noisecollector__pongblipf-4.wav");
     Paddle rightPaddle(WINDOW_INIT_WIDTH - PADDLE_OFFSET_X - PADDLE_WIDTH,
                        WINDOW_INIT_HEIGHT / 2 - PADDLE_HEIGHT / 2,
-                       sf::Keyboard::Key::Up,
-                       sf::Keyboard::Key::Down);
+                       sf::Keyboard::Key::Up, sf::Keyboard::Key::Down,
+                       std::string(PROJECT_ASSET_DIR) + "/sounds/4391__noisecollector__pongblipf-5.wav");
     std::vector<Paddle> paddles = {leftPaddle, rightPaddle};
     Score leftScore(WINDOW_INIT_WIDTH / 4, 0, WINDOW_INIT_WIDTH);
     Score rightScore(WINDOW_INIT_WIDTH * 3 / 4 - FONT_SIZE_PIXELS, 0, -SCORE_ZONE_WIDTH);
@@ -44,8 +54,8 @@ int main()
             ball.listenForInput();
         }
 
-        ball.paddleCollision(leftPaddle.getShape().getGlobalBounds());
-        ball.paddleCollision(rightPaddle.getShape().getGlobalBounds());
+        ball.paddleCollision(leftPaddle.getShape().getGlobalBounds(), &leftPaddle);
+        ball.paddleCollision(rightPaddle.getShape().getGlobalBounds(), &rightPaddle);
         ball.updatePos();
 
         bool leftHasScored = leftScore.attemptScore(ball.getShape().getGlobalBounds());

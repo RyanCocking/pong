@@ -25,11 +25,12 @@ void Ball::wallCollision()
     }
 }
 
-void Ball::paddleCollision(sf::FloatRect paddleRect)
+void Ball::paddleCollision(sf::FloatRect paddleRect, Paddle *paddle)
 {
     if (shape.getGlobalBounds().intersects(paddleRect))
     {
         velocity.x *= -1;
+        paddle->playSound();
     }
 
     // needs a situation incase ball hits top of paddle!

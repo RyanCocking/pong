@@ -15,7 +15,8 @@ set(MATHFU_ROOT "/home/ryan/Software/mathfu")
 set(SFML_LIBS 
     "sfml-system" 
     "sfml-window" 
-    "sfml-graphics")
+    "sfml-graphics"
+    "sfml-audio")
 
 set(CPP_FILES 
     "${PROJECT_SOURCE_DIR}/src/main.cpp" 
