@@ -10,6 +10,8 @@ A clone of the classic arcade game, Pong.
         make
         ./Pong
 
+Creating a static binary with SFML is a bit complicated. You must link against SFML static libraries and all their dependencies. [Read more](https://www.sfml-dev.org/faq.php#build-link-static).
+
 ## X server graphics
 
 blahblah
