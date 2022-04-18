@@ -3,14 +3,13 @@
 # https://tomranner.org/post/cmake-config/
 
 # ==================== Parameters ==================== #
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.16)
 project(Pong)
 set(PROJECT_VERSION_MAJOR 0)
 set(PROJECT_VERSION_MINOR 1)
 set(PROJECT_ASSET_DIR "\"${PROJECT_SOURCE_DIR}/assets\"")
 
 set(SFML_INCLUDE_DIR "/usr/include/SFML")
-set(MATHFU_ROOT "/home/ryan/Software/mathfu")
 
 set(SFML_LIBS 
     "sfml-system" 
