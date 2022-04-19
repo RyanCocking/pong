@@ -20,6 +20,7 @@ Paddle::Paddle(
     shape.setFillColor(sf::Color::White);
 
     buffer.loadFromFile(soundFile);
+	soundOnHit.setBuffer(buffer);
 }
 
 void Paddle::updatePos(float dx, float dy)
@@ -66,6 +67,6 @@ void Paddle::checkBounds()
 
 void Paddle::playSound()
 {
-    soundOnHit.setBuffer(buffer);
+    
     soundOnHit.play();
 }
