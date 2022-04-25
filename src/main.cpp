@@ -74,6 +74,7 @@ int main()
             ball.resetPos();
             leftScore.reset();
             rightScore.reset();
+            // sf::sleep()
         }
 
         sf::Event event;

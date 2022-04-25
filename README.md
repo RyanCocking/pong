@@ -2,7 +2,7 @@
 
 A clone of the classic arcade game, Pong.
 
-## Compilation
+## Compilation: Linux
 
         mkdir build
         cd build
@@ -10,19 +10,30 @@ A clone of the classic arcade game, Pong.
         make
         ./Pong
 
-A static binary can be shared and run across Linux operating systems without being recompiled each time. 
+This makes a dynamically-linked executable, and I haven't yet figured out a nice
+way to package it up for other Linux distros (dynamic or static). I think the dirty
+way to release a game on Linux will involve downloading SFML with the game, or asking
+players to download it. In both cases the executable would be compiled before
+playing.
 
-Creating a static binary with SFML is a bit complicated; you must link against SFML static libraries **and** their dependencies. 
-* [Compile a standalone static executable](https://stackoverflow.com/questions/3283021/compile-a-standalone-static-executable) 
-* [SFML static compilation](https://www.sfml-dev.org/faq.php#build-link-static) 
-* [CMake static compilation](https://stackoverflow.com/questions/24648357/compiling-a-static-executable-with-cmake)
-  
-Binaries compiled on Linux cannot be run on Windows.
+## Compilation: Windows
 
-## X server graphics
+On Windows 10, [install a C++ compiler via MYS2](https://code.visualstudio.com/docs/cpp/config-mingw). You will be able to run gcc and g++ from the Windows command prompt.
 
-blahblah
+Install the [version of SFML compiled with 64-bit MinGW](https://www.sfml-dev.org/download/sfml/2.5.1/), 
+the same compiler you just installed.
 
-## X server audio
+[Build SFML on Windows](https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake.php).
 
-I could not get audio to work over WSL2, even with the guides being relatively straightforward. Windows 11 features this as a default.
+Run build.bat from the command prompt. This is currently set up for dynamic linking.
+
+In order to run the game, all the linked .dll and .a libraries must be included
+inside the same directory as the executable (although the .bat currently links
+against .a libraries inside the SFML source directory on Windows).
+
+I think in an ideal situation, you would first copy the relevant .dll and .a
+libraries into a project directory, with some organisation, and then you would
+link against those libraries when compiling from build.bat. This way, the entire
+project could be moved to another Windows machine and work.
+
+*CMake just overcomplicates things!*
