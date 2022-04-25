@@ -23,7 +23,7 @@ On Windows 10, [install a C++ compiler via MYS2](https://code.visualstudio.com/d
 Install the [version of SFML compiled with 64-bit MinGW](https://www.sfml-dev.org/download/sfml/2.5.1/), 
 the same compiler you just installed.
 
-[Build SFML on Windows](https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake.php).
+[Build SFML on Windows](https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake.php) (you don't actually need to use CMake here).
 
 Run build.bat from the command prompt. This is currently set up for dynamic linking.
 
