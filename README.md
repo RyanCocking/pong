@@ -9,12 +9,8 @@ A clone of the classic arcade game, Pong.
         cmake ../
         make
         ./Pong
-
-This makes a dynamically-linked executable, and I haven't yet figured out a nice
-way to package it up for other Linux distros (dynamic or static). I think the dirty
-way to release a game on Linux will involve downloading SFML with the game, or asking
-players to download it. In both cases the executable would be compiled before
-playing.
+        
+I haven't yet figured out a way to package it up statically for Linux.
 
 ## Compilation: Windows
 
@@ -35,5 +31,3 @@ I think in an ideal situation, you would first copy the relevant .dll and .a
 libraries into a project directory, with some organisation, and then you would
 link against those libraries when compiling from build.bat. This way, the entire
 project could be moved to another Windows machine and work.
-
-*CMake just overcomplicates things!*
