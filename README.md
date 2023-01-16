@@ -1,6 +1,6 @@
 # Pong
 
-A clone of the classic arcade game, Pong.
+A clone of the classic arcade game, Pong. Written in C++ and SFML as a learning exercise.
 
 ## Compilation: Linux
 
