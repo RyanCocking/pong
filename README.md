@@ -14,10 +14,10 @@ I haven't yet figured out a way to package it up statically.
 
 ## Compilation: Windows 10
 
-* [Install a C++ compiler](https://code.visualstudio.com/docs/cpp/config-mingw). You will be able to run `gcc` and `g++` from the Windows command prompt.
-* [Install the latest version of SFML](https://www.sfml-dev.org/download/sfml/3.0.0).
-* [Build SFML on Windows](https://www.sfml-dev.org/tutorials/3.0/getting-started/build-from-source).
-* Run `build.bat` from the command prompt. This is currently set up for dynamic linking.
+* [Install a C++ compiler](https://code.visualstudio.com/docs/cpp/config-mingw)
+* [Install the latest version of SFML](https://www.sfml-dev.org/download/sfml/3.0.0)
+* [Build SFML on Windows](https://www.sfml-dev.org/tutorials/3.0/getting-started/build-from-source)
+* Run `build.bat` from the command prompt (dynamic linking)
 
 In order to run the game, all the linked `.dll` and `.a` libraries must be included
 inside the same directory as the executable (although the `.bat` currently links
