@@ -2,6 +2,8 @@
 
 A clone of the classic arcade game, Pong. Written in C++ and SFML 2.6 as a learning exercise.
 
+![pong](https://github.com/user-attachments/assets/88ff5946-8c63-4c0e-b48d-d6a01b9cd787)
+
 ## Compilation: Linux
 
         mkdir build
